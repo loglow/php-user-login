@@ -1,9 +1,10 @@
-<?php
+<?php // reset_pass_1.php -- Page to initiate a password reset.
 
 require_once("main.php");
 
 require('header.php');
 
+// Display a form for the user to enter their email address and verify it.
 ?>
 
 <form action="reset_pass_2.php" method="post">

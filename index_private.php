@@ -1,11 +1,13 @@
-<?php
+<?php // index_private.php -- Default landing page when a user is signed in.
 
 require_once("main.php");
 
 require('header.php');
 
+// Load all info about this user from the database
 $user = get_user_data($_SESSION['user']);
 
+// Display user info, then options to change password, delete account, or sign out.
 ?>
 
 <dl>

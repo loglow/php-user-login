@@ -1,8 +1,10 @@
-<?php
+<?php // main.php -- Global variables and functions.
 
+// Set the title of the site and the email return address.
 $site_title = "PHP User Login";
-$email_from = "noreply@sites.nearlyfreespeech.net";
+$email_from = "noreply@example.com";
 
+// Create a new database connection object and return it.
 function get_db() {
 	$db = new PDO('sqlite:users.db');
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -10,6 +12,7 @@ function get_db() {
 	return $db;
 }
 
+// Return all the data about one particular user.
 function get_user_data($user) {
 	$sql = get_db()->prepare("SELECT * FROM users WHERE user = ?");
 	$sql->bindValue(1, $user);
@@ -18,6 +21,7 @@ function get_user_data($user) {
 	return $row;
 }
 
+// Display an alert message based on a short code.
 function alert($code) {
 	echo "<p>";
 	echo "<em>";
@@ -35,7 +39,7 @@ function alert($code) {
 		case 'user_error': echo 'No user exists with that name.'; break;
 		case 'user_created': echo 'New user account created successfully.'; break;
 		case 'sent_reg': echo 'Registration link sent, check your email.'; break;
-		case 'sent_reset': echo 'Reset pssword link sent, check your email.'; break;
+		case 'sent_reset': echo 'Reset password link sent, check your email.'; break;
 		case 'token_error': echo 'Invalid email address or session token.'; break;
 		case 'token_expired': echo 'Your session token has expired.'; break;
 		case 'not_deleted': echo 'Delete confirmation was incorrect.'; break;

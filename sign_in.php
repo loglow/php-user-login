@@ -1,9 +1,10 @@
-<?php
+<?php // sign_in.php -- Page for the user to enter their credentials.
 
 require_once("main.php");
 
 require('header.php');
 
+// Display a form for the user to enter their username and password. Also provide password reset and sign up links.
 ?>
 
 <form action="auth.php" method="post">

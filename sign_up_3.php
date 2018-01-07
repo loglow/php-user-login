@@ -1,7 +1,8 @@
-<?php
+<?php // sign_up_3.php -- Process and respond to an emailed account registration link.
 
 require_once("main.php");
 
+// Make sure the request contains an email address and token, otherwise redirect to index.
 $invalid = false;
 if (!$_GET['email']) $invalid = true;
 if (!$_GET['token']) $invalid = true;
@@ -10,12 +11,14 @@ if ($invalid) {
 	exit;
 }
 
+// Make sure that a session token actually exists, otherwise go to index with an error.
 session_start();
 if (!$_SESSION['token']) {
 	header('Location: index.php?m=token_expired');
 	exit;
 }
 
+// Check to see if the provided token matches the session token. If they don't match, error.
 if (!password_verify($_GET['email'].$_GET['token'], $_SESSION['token'])) {
 	header('Location: index.php?m=token_error');
 	exit;
@@ -23,6 +26,7 @@ if (!password_verify($_GET['email'].$_GET['token'], $_SESSION['token'])) {
 
 require('header.php');
 
+// The tokens match, so display a form for the new user to create a password.
 ?>
 
 <form action="sign_up_4.php" method="post">
